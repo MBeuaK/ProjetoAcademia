@@ -20,7 +20,7 @@ public class AlunoController {
 	private AlunoService service;
 	
 	@GetMapping
-	public List<Aluno> get() {
+	public Iterable<Aluno> get() {
 		return service.getAlunos();
 	}
 	

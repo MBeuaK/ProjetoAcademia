@@ -1,16 +1,11 @@
 package com.academia.model;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "ALUNO")
-public class Aluno {
-
+public class Instrutor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -18,12 +13,12 @@ public class Aluno {
 	@Column(name = "NOME")
 	private String nome; 
 
-	public Aluno(long id, String nome) {
+	public Instrutor(long id, String nome) {
 		this.nome = nome;
 		this.id = id;
 	}
 	
-	public Aluno() {
+	public Instrutor() {
 	}
 
 
