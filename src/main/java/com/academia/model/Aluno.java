@@ -1,9 +1,20 @@
 package com.academia.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ALUNO")
 public class Aluno {
-	private String nome; 
+
+	@Id
 	private long id;
 	
+	@Column(name = "NOME")
+	private String nome; 
+
 	public Aluno(long id, String nome) {
 		super();
 		this.nome = nome;

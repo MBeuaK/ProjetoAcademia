@@ -2,6 +2,7 @@ package com.academia.api;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,8 @@ import com.academia.model.AlunoService;
 @RestController
 @RequestMapping("/api/v1/alunos")
 public class AlunoController {
-	private AlunoService service= new AlunoService();
+	@Autowired
+	private AlunoService service;
 	
 	@GetMapping
 	public List<Aluno> get() {
