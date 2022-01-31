@@ -57,15 +57,6 @@ public class Treino {
 	public void setNomeDoTreino(String nomeDoTreino) {
 		this.nomeDoTreino = nomeDoTreino;
 	}
-
-	public String getTipoTreino() {
-		return tipoTreino;
-	}
-
-	public void setTipoTreino(String tipoTreino) {
-		this.tipoTreino = tipoTreino;
-	}
-	
 	
 
 }

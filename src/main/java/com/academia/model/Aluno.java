@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,12 +27,20 @@ public class Aluno {
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id")
 	private List<Treino> treino;
-
-	public Aluno(long id, String nome) {
-		this.nome = nome;
-		this.id = id;
-	}
 	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id")
+	private Instrutor instrutor;
+
+	
+	
+	public Aluno(long id, String nome, Instrutor instrutor) {
+		this.id = id;
+		this.nome = nome;
+		this.instrutor = instrutor;
+	}
+
+
 	public Aluno() {
 	}
 
@@ -51,6 +60,16 @@ public class Aluno {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public Instrutor getInstrutor() {
+		return instrutor;
+	}
+
+	public void setInstrutor(Instrutor instrutor) {
+		this.instrutor = instrutor;
+	}
+	
+	
 	
 
 }
