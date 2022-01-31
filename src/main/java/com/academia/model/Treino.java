@@ -1,28 +1,36 @@
 package com.academia.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name="treino")
+@Table(name="TREINO")
 public class Treino {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "nome_treino")
+	@Column(name = "NOME_TREINO")
 	private String nomeDoTreino;
 	
-	@Column(name = "tipo_treino")
+	@Column(name = "TIPO_TREINO")
 	private String tipoTreino;
-
 	
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id")
+	private List<Exercicio> exercicio;
 	
 	public Treino(int id, String nomeDoTreino, String tipoTreino) {
 		this.id = id;

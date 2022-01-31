@@ -1,4 +1,4 @@
-package com.academia.api;
+package com.academia.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.academia.model.Aluno;
-import com.academia.model.AlunoService;
+
+import service.AlunoService;
 
 @RestController
 @RequestMapping("/api/v1/alunos")
