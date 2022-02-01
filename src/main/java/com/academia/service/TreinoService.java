@@ -1,5 +1,6 @@
 package com.academia.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class TreinoService {
 	public Iterable<Treino> getTreino(){
 		return treinoRepository.findAll();
 
+	}
+	
+	public List<Treino> getTreinoByTipo(String tipo){
+		return treinoRepository.findByTipo(tipo);
 	}
 
 	public Optional<Treino> getTreinoById(Long id) {

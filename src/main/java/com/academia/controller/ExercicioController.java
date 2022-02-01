@@ -4,6 +4,7 @@ package com.academia.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,13 +24,16 @@ public class ExercicioController {
 	private ExercicioService exercicioService;
 	
 	@GetMapping
-	public Iterable<Exercicio> get() {
-		return exercicioService.getExercicio();
+	public ResponseEntity<Iterable<Exercicio>> get() {
+		return ResponseEntity.ok(exercicioService.getExercicio());
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Exercicio> get(@PathVariable("id") Long id) {
-		return exercicioService.getExercicioById(id);
+	public ResponseEntity<Exercicio> get(@PathVariable("id") Long id) {
+		Optional<Exercicio> exercicio = exercicioService.getExercicioById(id);
+		return exercicio
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	

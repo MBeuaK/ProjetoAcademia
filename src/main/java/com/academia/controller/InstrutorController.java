@@ -4,6 +4,7 @@ package com.academia.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.academia.model.Exercicio;
 import com.academia.model.Instrutor;
 import com.academia.service.InstrutorService;
 
@@ -23,13 +25,16 @@ public class InstrutorController {
 	private InstrutorService instrutorService;
 	
 	@GetMapping
-	public Iterable<Instrutor> get() {
-		return instrutorService.getInstrutor();
+	public ResponseEntity<Iterable<Instrutor>> get() {
+		return ResponseEntity.ok(instrutorService.getInstrutor());
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Instrutor> get(@PathVariable("id") Long id) {
-		return instrutorService.getInstrutorById(id);
+	public ResponseEntity<Instrutor> get(@PathVariable("id") Long id) {
+		Optional<Instrutor> instrutor = instrutorService.getInstrutorById(id);
+		return instrutor
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	

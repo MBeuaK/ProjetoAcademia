@@ -4,6 +4,7 @@ package com.academia.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,15 +24,18 @@ public class AlunoController {
 	private AlunoService alunoService;
 	
 	@GetMapping
-	public Iterable<Aluno> get() {
-		return alunoService.getAlunos();
+	public ResponseEntity<Iterable<Aluno>> get() {
+		return ResponseEntity.ok(alunoService.getAlunos());
 	}
-	
+	 
 	@GetMapping("/{id}")
-	public Optional<Aluno> get(@PathVariable("id") Long id) {
-		return alunoService.getAlunosById(id);
+	public ResponseEntity<Aluno> get(@PathVariable("id") Long id) {
+		Optional<Aluno> aluno = alunoService.getAlunosById(id);
+		return aluno
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 	}
-	
+	 
 	
 	@PostMapping
 	public String post(@RequestBody Aluno aluno) {

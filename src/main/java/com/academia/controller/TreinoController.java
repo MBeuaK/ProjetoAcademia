@@ -1,9 +1,11 @@
 package com.academia.controller;
 
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,15 +25,26 @@ public class TreinoController {
 	private TreinoService treinoService;
 	
 	@GetMapping
-	public Iterable<Treino> get() {
-		return treinoService.getTreino();
+	public ResponseEntity<Iterable<Treino>> get() {
+		return ResponseEntity.ok(treinoService.getTreino());
 	}
 	
 	@GetMapping("/{id}")
-	public Optional<Treino> get(@PathVariable("id") Long id) {
-		return treinoService.getTreinoById(id);
+	public ResponseEntity<Treino> get(@PathVariable("id") Long id) {
+		Optional<Treino> treino = treinoService.getTreinoById(id);
+		return treino
+				.map(ResponseEntity::ok)
+				.orElse(ResponseEntity.notFound().build());
 	}
 	
+	@GetMapping("/tipo/{tipo}")
+	public ResponseEntity<List<Treino>> getTreinoByTipo(@PathVariable("tipo") String tipo){
+		List<Treino> treinos = treinoService.getTreinoByTipo(tipo);
+		
+		return treinos.isEmpty() ?
+				ResponseEntity.noContent().build() :
+					ResponseEntity.ok(treinos);
+	}
 	
 	@PostMapping
 	public String post(@RequestBody Treino treino) {

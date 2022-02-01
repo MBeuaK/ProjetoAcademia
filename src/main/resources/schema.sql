@@ -8,8 +8,8 @@
 		id int AUTO_INCREMENT PRIMARY KEY,
 		nome_treino varchar(250),
 		tipo_treino varchar(50)  NOT NULL,
-		fk_exercicio int,
-		FOREIGN KEY (fk_exercicio) REFERENCES exercicio(id)
+		exercicio_id int,
+		CONSTRAINT fk_exercicio_id FOREIGN KEY (exercicio_id) REFERENCES exercicio(id)
 	);
 	
 	CREATE TABLE instrutor(
@@ -20,9 +20,9 @@
 	CREATE TABLE aluno(
 		id int AUTO_INCREMENT PRIMARY KEY,
 		nome_aluno varchar(250) NOT NULL,
-		fk_instrutor int,
-		fk_treino int,
-		FOREIGN KEY (fk_instrutor) REFERENCES instrutor(id),
-		FOREIGN KEY (fk_treino) REFERENCES treino(id)
+		instrutor_id int,
+		treino_id int,
+        CONSTRAINT fk_treino_id FOREIGN KEY (treino_id) REFERENCES treino(id),
+        CONSTRAINT fk_instrutor_id FOREIGN KEY (instrutor_id) REFERENCES instrutor(id)
+        
 	);
-	

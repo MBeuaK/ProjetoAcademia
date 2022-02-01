@@ -12,12 +12,12 @@ import javax.persistence.Table;
 public class Instrutor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private int id;
 	
 	@Column(name = "NOME")
 	private String nome; 
 
-	public Instrutor(long id, String nome) {
+	public Instrutor(int id, String nome) {
 		this.nome = nome;
 		this.id = id;
 	}
@@ -26,11 +26,11 @@ public class Instrutor {
 	}
 
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
