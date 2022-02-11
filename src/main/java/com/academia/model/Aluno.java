@@ -19,7 +19,7 @@ public class Aluno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
 	@Column(name = "NOME")
 	private String nome; 
@@ -34,7 +34,7 @@ public class Aluno {
 
 	
 	
-	public Aluno(int id, String nome, Instrutor instrutor) {
+	public Aluno(Long id, String nome, Instrutor instrutor) {
 		this.id = id;
 		this.nome = nome;
 		this.instrutor = instrutor;
@@ -45,11 +45,11 @@ public class Aluno {
 	}
 
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 	
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
