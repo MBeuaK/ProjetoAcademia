@@ -21,8 +21,8 @@ public class TreinoService {
 
 	}
 	
-	public List<Treino> getTreinoByTipo(String tipo){
-		return treinoRepository.findByTipo(tipo);
+	public List<Treino> getTreinoByTipo(int tipo){
+		return treinoRepository.findByTipoTreino(tipo);
 	}
 
 	public Optional<Treino> getTreinoById(Long id) {

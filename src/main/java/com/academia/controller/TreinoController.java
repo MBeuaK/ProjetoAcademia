@@ -38,7 +38,7 @@ public class TreinoController {
 	}
 	
 	@GetMapping("/tipo/{tipo}")
-	public ResponseEntity<List<Treino>> getTreinoByTipo(@PathVariable("tipo") String tipo){
+	public ResponseEntity<List<Treino>> getTreinoByTipo(@PathVariable("tipo") int tipo){
 		List<Treino> treinos = treinoService.getTreinoByTipo(tipo);
 		
 		return treinos.isEmpty() ?

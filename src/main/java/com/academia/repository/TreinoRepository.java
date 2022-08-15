@@ -1,14 +1,13 @@
 package com.academia.repository;
 
-import java.util.List;
-
+import com.academia.model.Treino;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.academia.model.Treino;
+import java.util.List;
 
 @Repository
 public interface TreinoRepository extends CrudRepository<Treino, Long>{
 
-	List<Treino> findByTipo(String tipo);
+	List<Treino> findByTipoTreino(int tipo);
 }
