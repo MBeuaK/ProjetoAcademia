@@ -1,10 +1,16 @@
 package com.academia.service;
 
+import java.text.MessageFormat;
 import java.util.Optional;
 
+import com.academia.model.dto.AlunoDTO;
+import com.academia.model.dto.BaseResponseDTO;
+import com.academia.util.MensagemUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import com.academia.model.Aluno;
 import com.academia.repository.AlunoRepository;
@@ -24,27 +30,32 @@ public class AlunoService {
 		return alunoRepository.findById(id);
 	}
 
-	public Aluno insert(Aluno aluno) {
+	public Aluno criarAluno(AlunoDTO alunoDTO) {
+		Aluno aluno = new Aluno();
+		Optional<Aluno> optional = getAlunosById(alunoDTO.getId());
+
+		if(optional.isPresent()){
+			throw new IllegalArgumentException(MessageFormat
+					.format(MensagemUtil.ALUNO_ID_JA_CADASTRADO, alunoDTO.getId()));
+		}
+
+		BeanUtils.copyProperties(alunoDTO, aluno);
+
 		return alunoRepository.save(aluno);
 	}
 
-	public Aluno update(Aluno aluno, Long id) {
-		Assert.notNull(id, "Não foi possivel atualizar o registro do aluno");
-		
-		//Busca o aluno no banco de dados
+	public Object update(AlunoDTO alunoDTO, Long id) {
 		Optional<Aluno> optional = getAlunosById(id);
+
 		if(optional.isPresent()) {
-			Aluno db=optional.get();
-			//Copia as propriedades
-			db.setId(aluno.getId());
-			db.setNome(aluno.getNome());
-			System.out.println("Aluno id: " + db.getId());
+			Aluno aluno=optional.get();
+
+			BeanUtils.copyProperties(alunoDTO, alunoDTO);
 			
-			//Atualiza o aluno
-			alunoRepository.save(db);
-			return db;
+			alunoRepository.save(aluno);
+			return alunoRepository.save(aluno);
 		} else {
-			throw new RuntimeException("Não foi possivel atualizar o registro do aluno");
+			throw new IllegalArgumentException(MessageFormat.format(MensagemUtil.ALUNO_NAO_ECONTRADO, id));
 		}
 	}
 	

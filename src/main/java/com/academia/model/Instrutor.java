@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="instrutor")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Instrutor {
