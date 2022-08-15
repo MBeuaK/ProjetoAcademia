@@ -1,75 +1,32 @@
 package com.academia.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "ALUNO")
+@Table(name = "aluno")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Aluno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "aluno_id")
 	private Long id;
 	
-	@Column(name = "NOME")
-	private String nome; 
-
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id")
-	private List<Treino> treino;
+	@Column(name = "nome_aluno")
+	private String nome;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "instrutor_id")
 	private Instrutor instrutor;
-
-	
-	
-	public Aluno(Long id, String nome, Instrutor instrutor) {
-		this.id = id;
-		this.nome = nome;
-		this.instrutor = instrutor;
-	}
-
-
-	public Aluno() {
-	}
-
-
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-	
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Instrutor getInstrutor() {
-		return instrutor;
-	}
-
-	public void setInstrutor(Instrutor instrutor) {
-		this.instrutor = instrutor;
-	}
-	
-	
-	
 
 }

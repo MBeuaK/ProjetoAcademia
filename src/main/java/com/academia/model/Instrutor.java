@@ -1,46 +1,26 @@
 package com.academia.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name="INSTRUTOR")
+@Table(name="instrutor")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Instrutor {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "instrutor_id")
+	private Long id;
 	
-	@Column(name = "NOME")
-	private String nome; 
-
-	public Instrutor(int id, String nome) {
-		this.nome = nome;
-		this.id = id;
-	}
-	
-	public Instrutor() {
-	}
-
-
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-	
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
+	@Column(name = "nome_instrutor")
+	private String nome;
 
 }

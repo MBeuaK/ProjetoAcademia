@@ -1,62 +1,34 @@
 package com.academia.model;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
-@Table(name="TREINO")
+@Table(name="treino")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Treino {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name="treino_id")
+	private Long id;
 	
-	@Column(name = "NOME_TREINO")
+	@Column(name = "nome_treino")
 	private String nomeDoTreino;
 	
-	@Column(name = "TIPO_TREINO")
-	private String tipoTreino;
-	
+	@Column(name = "tipo_treino")
+	private int tipoTreino;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id")
-	private List<Exercicio> exercicio;
-	
-	public Treino(int id, String nomeDoTreino, String tipoTreino) {
-		this.id = id;
-		this.nomeDoTreino = nomeDoTreino;
-		this.tipoTreino = tipoTreino;
-	}
-	
-
-	public Treino() {
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNomeDoTreino() {
-		return nomeDoTreino;
-	}
-
-	public void setNomeDoTreino(String nomeDoTreino) {
-		this.nomeDoTreino = nomeDoTreino;
-	}
-	
+	@ManyToOne
+	@JoinColumn(name = "aluno_id")
+	private Aluno aluno;
 
 }

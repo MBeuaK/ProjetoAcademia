@@ -1,16 +1,16 @@
 package com.academia.model.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseResponseDTO {
+public class InstrutorDTO {
 
-    private Integer code;
-    private String message;
-    private Object data;
-
+    private Long id;
+    private String nome;
 }
